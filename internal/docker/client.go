@@ -33,7 +33,7 @@ func (c *Client) manifestURL(repo, name, reference string) string {
 
 func (c *Client) blobURL(repo, name, digest string) string {
 	if repo == "docker.io" || repo == "dockerhub.timeweb.cloud" {
-		repo = "registry-1.docker.io" 
+		repo = "registry-1.docker.io"
 	}
 
 	if repo == "registry-1.docker.io" && !strings.Contains(name, "/") {

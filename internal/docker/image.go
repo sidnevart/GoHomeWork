@@ -35,7 +35,7 @@ func (c *Client) GetImageLayerInfo(repo, name, tag string) (int, int64, error) {
 
 func (c *Client) GetOSReleaseInfo(repo, name, tag string) (*OSRelease, error) {
 	client := &http.Client{
-		Timeout: 10 * time.Minute, 
+		Timeout: 10 * time.Minute,
 	}
 
 	manifest, err := c.fetchManifest(repo, name, tag)
@@ -59,7 +59,7 @@ func (c *Client) GetOSReleaseInfo(repo, name, tag string) (*OSRelease, error) {
 		}
 		req.Header.Set("Authorization", "Bearer "+token)
 
-		resp, err := client.Do(req) 
+		resp, err := client.Do(req)
 		if err != nil {
 			log.Printf("ERROR: Failed to fetch blob %s for %s/%s:%s: %v", layer.Digest, repo, name, tag, err)
 			return nil, ErrInternal
@@ -82,7 +82,7 @@ func (c *Client) GetOSReleaseInfo(repo, name, tag string) (*OSRelease, error) {
 		for {
 			hdr, err := tr.Next()
 			if err == io.EOF {
-				break 
+				break
 			}
 			if err != nil {
 				log.Printf("ERROR: Failed to read tar stream for %s in %s/%s:%s: %v", layer.Digest, repo, name, tag, err)
@@ -149,9 +149,9 @@ func (c *Client) fetchManifest(repo, name, tag string) (*Manifest, error) {
 				log.Printf("ERROR: Failed to fetch manifest with token for %s/%s:%s: %v", repo, fullName, tag, err)
 				return nil, ErrInternal
 			}
-			continue 
+			continue
 		}
-		break 
+		break
 	}
 
 	body, err := io.ReadAll(resp.Body)
@@ -199,7 +199,7 @@ func (c *Client) fetchManifest(repo, name, tag string) (*Manifest, error) {
 				}
 				req.Header.Set("Accept", "application/vnd.docker.distribution.manifest.v2+json")
 				if token == "" {
-					token, _ = c.getAuthToken(repo, name) 
+					token, _ = c.getAuthToken(repo, name)
 				}
 				req.Header.Set("Authorization", "Bearer "+token)
 

@@ -8,8 +8,8 @@ var (
 )
 
 type Manifest struct {
-	SchemaVersion int    `json:"schemaVersion"`
-	MediaType     string `json:"mediaType"`
+	SchemaVersion int     `json:"schemaVersion"`
+	MediaType     string  `json:"mediaType"`
 	Layers        []Layer `json:"layers"`
 }
 
